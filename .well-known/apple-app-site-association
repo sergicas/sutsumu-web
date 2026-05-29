@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["Q479WYX9TL.cat.sergicastillo.sutsumu.v3"],
+        "components": [
+          {
+            "/": "/auth/callback*",
+            "comment": "Callback d'Auth (signup confirm + password reset)"
+          }
+        ]
+      }
+    ]
+  }
+}

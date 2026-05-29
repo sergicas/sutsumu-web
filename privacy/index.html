@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Política de privacitat — Sutsumu</title>
+  <meta name="description" content="Política de privacitat de Sutsumu: quines dades tractem, on es desen, com eliminar el compte.">
+  <meta name="robots" content="index, follow">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="../" class="brand">Sutsumu</a>
+      <nav>
+        <a href="../privacy/">Privacitat</a>
+        <a href="../terms/">Termes</a>
+      </nav>
+    </header>
+    <main>
+      <h1>Política de privacitat</h1>
+      <p class="subtitle">Última actualització: 2026-05-27 (esborrany inicial)</p>
+
+      <div class="pending">
+        <strong>Estat: esborrany inicial.</strong> Aquest document és la primera
+        versió pública de la política de privacitat de Sutsumu. No constitueix
+        assessorament legal i ha de passar revisió per un advocat abans del
+        llançament comercial. Si veus algun apartat poc clar, contacta'ns
+        (vegeu §10).
+      </div>
+
+      <h2>1. Qui som</h2>
+      <p>
+        Sutsumu és una aplicació per a iOS desenvolupada per
+        <strong>Sergi Castillo Lapeira</strong> (NIF <strong>38780920E</strong>),
+        amb adreça postal a <strong>Carrer Pintor Marià Andreu, 32, local ·
+        08302 Mataró (Barcelona) · Espanya</strong>. En aquesta política
+        se'l referencia com a "nosaltres".
+      </p>
+      <p>
+        Si tens qualsevol dubte sobre el tractament de les teves dades, escriu-nos
+        a <strong><a href="mailto:info@sergicastillo.com">info@sergicastillo.com</a></strong>.
+      </p>
+
+      <h2>2. Quines dades tractem</h2>
+      <p>
+        Sutsumu només tracta les dades estrictament necessàries perquè l'app
+        funcioni. En concret:
+      </p>
+      <ul>
+        <li><strong>Email del compte</strong>, si crees compte o inicies sessió. Es desa a Supabase Auth com a identificador del teu compte.</li>
+        <li><strong>Contingut que crees a l'app</strong>: documents, carpetes, etiquetes, categories, títols i text dels documents.</li>
+        <li><strong>Fitxers adjunts</strong> que decideixes pujar (PDFs, imatges, etc.).</li>
+        <li><strong>Metadades dels adjunts</strong>: nom de fitxer, tipus MIME, mida, data de creació/actualització.</li>
+        <li><strong>Dades tècniques mínimes</strong> necessàries per a l'autenticació i la sincronització: tokens de sessió, identificador d'usuari, marques de temps de sincronització.</li>
+      </ul>
+      <p>
+        Si fas servir l'app en <strong>mode local</strong> (sense iniciar sessió),
+        no enviem res al núvol; les dades viuen només al teu dispositiu.
+      </p>
+
+      <h2>3. Què NO tractem</h2>
+      <p>Sutsumu <strong>no</strong> recull, no rep i no envia a tercers:</p>
+      <ul>
+        <li>Analítica de producte ni telemetria d'ús.</li>
+        <li>Cookies o identificadors publicitaris.</li>
+        <li>Dades de geolocalització.</li>
+        <li>Contactes, calendari ni biblioteca de fotos (excepte quan tu mateix selecciones manualment una imatge per adjuntar a un document).</li>
+        <li>Cap dada amb finalitat de venda a tercers o publicitat dirigida.</li>
+        <li><strong>Dades de pagament</strong>: si en el futur activem la versió Premium, la compra es processarà via In-App Purchase d'Apple. Apple gestiona la facturació i nosaltres no tenim accés a les teves dades de targeta ni a cap altra informació financera.</li>
+      </ul>
+
+      <h2>4. Per què tractem les teves dades</h2>
+      <p>Tractem les teves dades únicament per:</p>
+      <ul>
+        <li>Permetre't iniciar sessió i tenir un compte.</li>
+        <li>Sincronitzar el teu contingut entre dispositius.</li>
+        <li>Mantenir el contingut accessible si reinstal·les l'app.</li>
+        <li>Conservar còpies de seguretat tècniques contra pèrdues accidentals.</li>
+      </ul>
+      <p>
+        No fem perfilat, ni decisions automatitzades sobre tu, ni cap
+        tractament que tingui efectes jurídics o et perjudiqui.
+      </p>
+
+      <h2>5. On es desen les teves dades</h2>
+      <table>
+        <thead>
+          <tr><th>Tipus de dada</th><th>Lloc</th><th>Tercer responsable</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Compte i auth</td><td>Supabase Auth</td><td>Supabase Inc.</td></tr>
+          <tr><td>Documents, carpetes, etiquetes</td><td>Supabase Postgres (<code>sutsumu_workspaces</code>)</td><td>Supabase Inc.</td></tr>
+          <tr><td>Adjunts (bytes)</td><td>Supabase Storage (bucket <code>sutsumu-attachments</code>)</td><td>Supabase Inc.</td></tr>
+          <tr><td>Còpia local</td><td>Sandbox de l'app al teu iPhone</td><td>Tu / Apple</td></tr>
+          <tr><td>Còpies setmanals visibles</td><td>Fitxers → A l'iPhone → Sutsumu → Còpies de seguretat</td><td>Tu / Apple</td></tr>
+        </tbody>
+      </table>
+      <p>
+        Les dades són processades a la regió que Supabase tingui assignada al
+        nostre projecte (avui: <strong>eu-west-1</strong>). Pots consultar més
+        informació sobre Supabase a la seva pròpia política:
+        <a href="https://supabase.com/privacy" rel="noopener">supabase.com/privacy</a>.
+      </p>
+
+      <h2>6. Backups tècnics</h2>
+      <p>
+        Mentre Sutsumu encara no és una app pública comercial, mantenim alguns
+        backups tècnics per protegir-nos de pèrdues accidentals:
+      </p>
+      <ul>
+        <li><strong>Còpies setmanals</strong> al teu dispositiu (carpeta <code>Còpies de seguretat</code> visible a Fitxers). Retenció: 4 setmanes; les més antigues s'esborren automàticament.</li>
+        <li><strong>Snapshots interns</strong> a l'<code>Application Support</code> de l'app (retenció: 15). No són accessibles fora de l'app.</li>
+        <li><strong>Backup nocturn</strong> al repositori privat de desenvolupament de Sutsumu a GitHub Actions, amb retenció de 30 dies. Aquest backup només existeix mentre el projecte està en fase de desenvolupament i serà repensat abans del llançament comercial per garantir un aïllament adequat entre usuaris.</li>
+      </ul>
+      <p>
+        Quan elimines el teu compte (vegeu §7), els backups tècnics que contenen
+        les teves dades s'aniran caducant segons les retencions indicades. No
+        mantenim còpies vives més enllà d'aquests períodes.
+      </p>
+
+      <h2>7. Eliminació del compte</h2>
+      <p>Pots eliminar el teu compte des de la mateixa app:</p>
+      <p><strong>Configuració → Perfil → Zona perillosa → Eliminar el meu compte.</strong></p>
+      <p>En confirmar:</p>
+      <ol>
+        <li>S'esborren tots els documents i carpetes a Supabase.</li>
+        <li>S'esborren tots els adjunts al bucket <code>sutsumu-attachments</code>.</li>
+        <li>S'esborra el teu compte d'auth (<code>auth.users</code>).</li>
+        <li>Es tanca la sessió local i s'esborra tot l'estat local de l'app relacionat amb el teu compte.</li>
+      </ol>
+      <p>
+        L'operació no es pot desfer. Si abans vols conservar una còpia, fes
+        servir <strong>Perfil → Còpia de seguretat → Exportar còpia</strong>.
+      </p>
+      <p>
+        Els backups tècnics descrits a §6 que continguin les teves dades quedaran
+        caducats segons les retencions ja indicades (4 setmanes locals, 30 dies
+        remotes); no fem cap acció addicional sobre ells.
+      </p>
+
+      <h2>8. Exportació de les teves dades (portabilitat)</h2>
+      <p>
+        Des de <strong>Perfil → Còpia de seguretat → Exportar còpia</strong> pots
+        descarregar en qualsevol moment un fitxer JSON amb tot el teu workspace
+        (documents, carpetes, etiquetes i metadades dels adjunts). El format és
+        obert i documentat al codi font.
+      </p>
+      <p>
+        Per als adjunts en si (PDFs, imatges, etc.), pots descarregar-los un per
+        un des dels documents corresponents.
+      </p>
+
+      <h2>9. Els teus drets</h2>
+      <p>Tens dret a:</p>
+      <ul>
+        <li><strong>Accedir</strong> a les teves dades (les pots veure i exportar des de l'app).</li>
+        <li><strong>Rectificar-les</strong> (les pots editar des de l'app).</li>
+        <li><strong>Eliminar-les</strong> (esborrant el compte; vegeu §7).</li>
+        <li><strong>Portar-les</strong> (exportació JSON; vegeu §8).</li>
+        <li><strong>Oposar-te</strong> al tractament o <strong>limitar-lo</strong>: contacta'ns (§10).</li>
+        <li>Presentar una <strong>reclamació</strong> davant l'autoritat de control competent (a Catalunya, l'<strong>Autoritat Catalana de Protecció de Dades</strong>; a la resta d'Espanya, l'<strong>AEPD</strong>).</li>
+      </ul>
+
+      <h2>10. Contacte</h2>
+      <p>Per a qualsevol qüestió relacionada amb privacitat o protecció de dades:</p>
+      <ul>
+        <li><strong>Email</strong>: <a href="mailto:info@sergicastillo.com">info@sergicastillo.com</a></li>
+        <li><strong>Adreça postal</strong>: Carrer Pintor Marià Andreu, 32, local · 08302 Mataró (Barcelona) · Espanya</li>
+      </ul>
+      <p>Respondrem en un termini raonable, com a màxim un mes des de la teva petició.</p>
+
+      <h2>11. Canvis a aquesta política</h2>
+      <p>
+        Si actualitzem aquesta política, en publicarem la nova versió al
+        repositori i, si el canvi és substancial, t'ho notificarem a l'app o per
+        correu electrònic abans que entri en vigor.
+      </p>
+
+      <blockquote>
+        <strong>Nota tècnica:</strong> aquest document és un esborrany inicial
+        pensat per facilitar la conformitat bàsica abans del llançament. No
+        substitueix l'assessorament d'un advocat — passar revisió legal abans
+        de publicar comercialment.
+      </blockquote>
+    </main>
+    <footer>
+      <nav>
+        <a href="../">Inici</a>
+        <a href="../terms/">Termes d'ús</a>
+      </nav>
+      <p>© Sutsumu</p>
+    </footer>
+  </div>
+</body>
+</html>
