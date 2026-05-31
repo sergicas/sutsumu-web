@@ -1,6 +1,11 @@
 {
   "applinks": {
+    "apps": [],
     "details": [
+      {
+        "appID": "Q479WYX9TL.cat.sergicastillo.sutsumu.v3",
+        "paths": ["/auth/callback*"]
+      },
       {
         "appIDs": ["Q479WYX9TL.cat.sergicastillo.sutsumu.v3"],
         "components": [
