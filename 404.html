@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
-  <title>Sutsumu - Autenticacio</title>
+  <title>Sutsumu</title>
   <link rel="stylesheet" href="/styles.css">
   <style>
     body {
@@ -40,21 +40,35 @@
   </style>
 </head>
 <body>
-  <main>
+  <main id="auth-callback" hidden>
     <h1>Obrint Sutsumu...</h1>
     <p>Si l'app no s'obre automaticament, toca aquest enllac des del teu iPhone:</p>
     <p><a id="open-app" href="cat.sergicastillo.sutsumu.v3://auth">Obrir Sutsumu</a></p>
     <p class="muted">Aquest enllac nomes serveix per completar l'autenticacio o el canvi de contrasenya.</p>
   </main>
 
-  <script>
-    const destination = `cat.sergicastillo.sutsumu.v3://auth${window.location.search}${window.location.hash}`;
-    const link = document.getElementById("open-app");
-    link.href = destination;
+  <main id="not-found" hidden>
+    <h1>Pagina no trobada</h1>
+    <p>Aquesta pagina de Sutsumu no existeix.</p>
+    <p><a href="/">Tornar a l'inici</a></p>
+  </main>
 
-    window.setTimeout(() => {
-      window.location.href = destination;
-    }, 150);
+  <script>
+    const isAuthCallback = window.location.pathname === "/auth/callback" ||
+      window.location.pathname === "/auth/callback/";
+
+    if (isAuthCallback) {
+      const destination = `cat.sergicastillo.sutsumu.v3://auth${window.location.search}${window.location.hash}`;
+      const link = document.getElementById("open-app");
+      document.getElementById("auth-callback").hidden = false;
+      link.href = destination;
+
+      window.setTimeout(() => {
+        window.location.href = destination;
+      }, 150);
+    } else {
+      document.getElementById("not-found").hidden = false;
+    }
   </script>
 </body>
 </html>
