@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Sutsumu - Autenticacio</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    main {
+      width: min(100%, 420px);
+      padding: 28px;
+      border: 1px solid rgba(31, 35, 40, 0.12);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: 0 16px 48px rgba(31, 35, 40, 0.08);
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 24px;
+      line-height: 1.2;
+    }
+
+    p {
+      line-height: 1.5;
+    }
+
+    .muted {
+      color: #5d6673;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Obrint Sutsumu...</h1>
+    <p>Si l'app no s'obre automaticament, toca aquest enllac des del teu iPhone:</p>
+    <p><a id="open-app" href="cat.sergicastillo.sutsumu.v3://auth">Obrir Sutsumu</a></p>
+    <p class="muted">Aquest enllac nomes serveix per completar l'autenticacio o el canvi de contrasenya.</p>
+  </main>
+
+  <script>
+    const destination = `cat.sergicastillo.sutsumu.v3://auth${window.location.search}${window.location.hash}`;
+    const link = document.getElementById("open-app");
+    link.href = destination;
+
+    window.setTimeout(() => {
+      window.location.href = destination;
+    }, 150);
+  </script>
+</body>
+</html>
