@@ -198,8 +198,10 @@ footer a:hover { color: var(--accent); }
   margin: 18px 0;
 }
 
-.landing-card h2 {
+.landing-card h2,
+.landing-card h3 {
   margin: 0 0 8px;
+  font-size: 17px;
 }
 
 .landing-card p {
@@ -217,7 +219,123 @@ footer a:hover { color: var(--accent); }
 
 .landing-card a.cta:hover { text-decoration: underline; }
 
+/* Hero — first impression */
+.hero {
+  padding: 24px 0 36px;
+  text-align: left;
+}
+
+.hero h1 {
+  font-size: 48px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0 0 8px;
+}
+
+.hero .lead {
+  font-family: "New York", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--accent);
+  margin: 0 0 18px;
+  line-height: 1.3;
+}
+
+.hero-pitch {
+  font-size: 16.5px;
+  color: var(--ink);
+  margin: 0 0 22px;
+  max-width: 56ch;
+}
+
+.hero-cta {
+  margin: 0;
+}
+
+.appstore-btn {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--bg) !important;
+  text-decoration: none !important;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+  transition: opacity 0.15s ease;
+}
+
+.appstore-btn:hover { opacity: 0.85; }
+
+/* What is Sutsumu */
+.pitch p {
+  font-size: 16px;
+  max-width: 60ch;
+}
+
+/* Highlights grid */
+.highlights {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 24px 0 8px;
+}
+
+.highlight-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+
+.highlight-card h3 {
+  font-size: 15.5px;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+
+.highlight-card p {
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--muted);
+}
+
+/* English block */
+.english {
+  margin-top: 36px;
+  padding: 20px 22px;
+  background: var(--code-bg);
+  border-radius: 12px;
+}
+
+.english h2 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.english p {
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--ink);
+  max-width: 64ch;
+}
+
+.english a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Resources */
+.resources { margin-top: 24px; }
+
 @media (min-width: 720px) {
   body { padding: 36px 24px 60px; }
   main h1 { font-size: 32px; }
+  .hero h1 { font-size: 64px; }
+  .hero .lead { font-size: 26px; }
+  .highlights { grid-template-columns: 1fr 1fr; }
 }
