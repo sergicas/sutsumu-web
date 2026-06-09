@@ -1,21 +1,25 @@
-/* Sutsumu — pàgines legals
+/* Sutsumu — landing pública i pàgines legals
  *
  * CSS minimal, sense dependències externes ni fonts remotes.
  * Mobile-first amb un breakpoint únic per a pantalla mitjana.
- * Coherent visualment amb el to sobri de l'app.
+ * Coherent visualment amb la marca v2 (Furoshiki / Argila): paleta
+ * argila + tinta + paper + lli + sàlvia (vegeu Resources/brand/ al
+ * repo principal).
  */
 
 :root {
   color-scheme: light dark;
 
-  /* Light theme */
-  --bg: #f8f8f6;
-  --surface: #ffffff;
-  --border: #e5e3dd;
-  --ink: #1c1c1a;
-  --muted: #6b6962;
-  --accent: #5b7fd4;
-  --code-bg: #f0eee8;
+  /* Light theme — marca v2 */
+  --bg: #f1ece2;          /* Lli */
+  --surface: #e7e0d1;     /* Paper */
+  --border: rgba(23,19,13,0.12);
+  --ink: #17130d;         /* Tinta */
+  --muted: #3a342b;       /* Tinta atenuada */
+  --accent: #cf5a2c;      /* Argila */
+  --accent-deep: #b14620; /* Argila profunda */
+  --sage: #6f7657;        /* Sàlvia (reserva) */
+  --code-bg: #ded5c2;     /* Paper-3 */
   --warn-bg: #fff7e0;
   --warn-border: #e6c570;
   --warn-ink: #6b5410;
@@ -23,13 +27,15 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #1a1a18;
-    --surface: #222220;
-    --border: #2e2e2b;
-    --ink: #ececea;
-    --muted: #9a9893;
-    --accent: #8caaf4;
-    --code-bg: #2a2a27;
+    --bg: #17130d;          /* Tinta */
+    --surface: #1f1a13;
+    --border: rgba(241,236,226,0.14);
+    --ink: #f1ece2;         /* Lli */
+    --muted: #c8c0ad;
+    --accent: #e07a4d;      /* Argila il·luminada */
+    --accent-deep: #cf5a2c;
+    --sage: #98a07a;
+    --code-bg: #261f17;
     --warn-bg: #2f2716;
     --warn-border: #6b5410;
     --warn-ink: #f0d68a;
@@ -65,12 +71,29 @@ header {
 }
 
 header a.brand {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
   font-weight: 700;
   font-size: 20px;
   color: var(--ink);
   text-decoration: none;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.025em;
+}
+
+header a.brand .brand-mark {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  color: var(--ink);
+}
+
+header a.brand .brand-text {
+  font-weight: 600;
+}
+
+header a.brand .brand-dot {
+  color: var(--accent);
 }
 
 header nav {
@@ -228,8 +251,13 @@ footer a:hover { color: var(--accent); }
 .hero h1 {
   font-size: 48px;
   line-height: 1.05;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   margin: 0 0 8px;
+  font-weight: 700;
+}
+
+.hero h1 .hero-dot {
+  color: var(--accent);
 }
 
 .hero .lead {
