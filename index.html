@@ -1,125 +1,584 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sutsumu — El teu arxiu personal curat</title>
-  <meta name="description" content="Sutsumu és una app per a iPhone que funciona com un arxiu personal: cura i conserva els teus documents amb la pulcritud d'una biblioteca pròpia.">
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#cf5a2c">
-  <meta property="og:title" content="Sutsumu — El teu arxiu personal curat">
-  <meta property="og:description" content="Una app per a iPhone que tracta els teus documents com una biblioteca: curada, persistent, teva.">
-  <meta property="og:url" content="https://sutsumu.com/">
-  <meta property="og:type" content="website">
-  <link rel="stylesheet" href="./styles.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#cf5a2c" />
+<title>Sutsumu — El teu arxiu personal curat</title>
+<meta name="description" content="Sutsumu és una app per a iPhone que tracta els teus documents com una biblioteca: curada, persistent, teva. Local des del primer dia, sense rastreig. Disponible a l'App Store." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://sutsumu.com/" />
+<meta property="og:title" content="Sutsumu — El teu arxiu personal curat" />
+<meta property="og:description" content="Una app per a iPhone que tracta els teus documents com una biblioteca: curada, persistent, teva." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://sutsumu.com/" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Sutsumu — El teu arxiu personal curat" />
+<meta name="twitter:description" content="Una app per a iPhone que tracta els teus documents com una biblioteca: curada, persistent, teva." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6efe4;
+    --paper-2:#fbf6ec;
+    --ink:#2a2521;
+    --ink-soft:#5c534a;
+    --ink-faint:#8a7f72;
+    --clay:#cf5a2c;
+    --clay-deep:#b14a22;
+    --line:#e3d8c6;
+    --card:#fffdf8;
+    --shadow:0 24px 60px -28px rgba(73,49,28,.45);
+    --serif:"Fraunces",Georgia,"Times New Roman",serif;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 22px}
+  a{color:inherit;text-decoration:none}
+  a:focus-visible{outline:3px solid rgba(207,90,44,.5);outline-offset:4px;border-radius:6px}
+  h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spacing:-.01em}
+  .eyebrow{
+    font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--clay);
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(246,239,228,.82);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .brand{display:inline-flex;align-items:center;gap:9px}
+  .brand-icon{width:36px;height:36px;color:var(--ink);display:block;margin-left:-3px}
+  .logo{font-family:"Quicksand",var(--sans);font-size:1.4rem;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+  .logo span{color:var(--clay)}
+  .nav-links{display:flex;align-items:center;gap:26px;font-size:.9rem}
+  .nav-links a.muted{color:var(--ink-soft)}
+  .nav-links a.muted:hover{color:var(--ink)}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    background:var(--ink);color:var(--paper-2);
+    padding:11px 18px;border-radius:999px;font-size:.86rem;font-weight:600;
+    transition:transform .2s ease,background .2s ease;white-space:nowrap;
+  }
+  .btn:hover{background:var(--clay-deep);transform:translateY(-1px)}
+  .btn svg{width:16px;height:16px;fill:currentColor}
+  .btn .ds{display:flex;flex-direction:column;line-height:1;text-align:left}
+  .btn .ds small{font-size:.6rem;font-weight:500;opacity:.8;letter-spacing:.02em}
+  .btn .ds b{font-size:.92rem;font-weight:600}
+  .nav .btn-mini{padding:9px 15px}
+  @media(max-width:640px){.nav-links .muted{display:none}}
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;padding:74px 0 40px}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+  .hero h1{font-size:clamp(2.6rem,7vw,4.5rem)}
+  .hero h1 em{font-style:italic;color:var(--clay)}
+  .hero p.lead{
+    margin-top:22px;font-size:1.12rem;color:var(--ink-soft);max-width:30em;
+  }
+  .hero .ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px;align-items:center}
+  .hero .note{font-size:.82rem;color:var(--ink-faint);margin-top:18px;display:flex;align-items:center;gap:8px}
+  .hero .note b{color:var(--ink-soft);font-weight:600}
+  .badge-row{display:flex;gap:18px;flex-wrap:wrap;margin-top:26px}
+  .badge-row .b{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--ink-soft)}
+  .badge-row .b svg{width:16px;height:16px;stroke:var(--clay);fill:none;stroke-width:2}
+
+  /* ---------- Phone mockup ---------- */
+  .phone-stage{display:flex;justify-content:center;align-items:center;position:relative}
+  .glow{position:absolute;width:340px;height:340px;border-radius:50%;
+    background:radial-gradient(circle,rgba(207,90,44,.28),transparent 65%);filter:blur(10px);z-index:0}
+  .phone{
+    position:relative;z-index:1;width:268px;height:556px;border-radius:46px;
+    background:#1c1916;padding:11px;box-shadow:var(--shadow);
+  }
+  .phone .screen{
+    width:100%;height:100%;border-radius:36px;overflow:hidden;
+    background:var(--paper-2);display:flex;flex-direction:column;
+  }
+  .notch{position:absolute;top:18px;left:50%;transform:translateX(-50%);
+    width:96px;height:26px;background:#1c1916;border-radius:0 0 16px 16px;z-index:3}
+  .app-top{padding:30px 20px 14px;border-bottom:1px solid var(--line)}
+  .app-top .eyebrow{font-size:.6rem;letter-spacing:.16em}
+  .app-top h3{font-size:1.45rem;margin-top:5px;font-weight:600}
+  .app-meta{display:flex;gap:7px;margin-top:11px;flex-wrap:wrap}
+  .chip{font-size:.6rem;padding:4px 9px;border-radius:999px;border:1px solid var(--line);color:var(--ink-soft);font-weight:500}
+  .chip.clay{background:var(--clay);color:#fff;border-color:var(--clay)}
+  .app-body{padding:16px 20px;flex:1;overflow:hidden}
+  .doc{padding:13px 14px;border-radius:13px;background:var(--card);border:1px solid var(--line);margin-bottom:11px}
+  .doc .t{font-family:var(--serif);font-size:.92rem;font-weight:600}
+  .doc .s{font-size:.66rem;color:var(--ink-faint);margin-top:3px}
+  .doc .dots{display:flex;gap:5px;margin-top:9px}
+  .doc .dots i{width:8px;height:8px;border-radius:50%;display:block}
+  .ln{height:7px;border-radius:4px;background:var(--line);margin-top:7px}
+  .ln.s{width:62%}
+
+  .app-screen{width:100%;height:100%;display:block}
+  .app-screen .serif{font-family:"Fraunces",Georgia,serif}
+  .app-screen .wm{font-family:"Quicksand",sans-serif;font-weight:700}
+  .app-screen .mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+
+  /* ---------- Sections ---------- */
+  section{padding:64px 0}
+  .section-head{max-width:40em;margin-bottom:42px}
+  .section-head h2{font-size:clamp(1.9rem,4.5vw,2.8rem);margin-top:10px}
+  .section-head p{margin-top:14px;color:var(--ink-soft);font-size:1.05rem}
+
+  /* Manifesto / antinotion */
+  .manifesto{background:var(--ink);color:var(--paper-2);border-radius:30px;padding:clamp(34px,6vw,64px);position:relative;overflow:hidden}
+  .manifesto::after{content:"";position:absolute;right:-80px;bottom:-90px;width:300px;height:300px;border-radius:50%;
+    background:radial-gradient(circle,rgba(207,90,44,.35),transparent 70%)}
+  .manifesto .eyebrow{color:#e88a5f}
+  .manifesto h2{font-size:clamp(2rem,5vw,3.2rem);margin-top:14px;max-width:16em;position:relative;z-index:1}
+  .manifesto h2 em{font-style:italic;color:#f0a079}
+  .manifesto p{margin-top:22px;color:#cdbfae;font-size:1.08rem;max-width:34em;position:relative;z-index:1}
+
+  /* Features grid */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .feat{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 24px;transition:transform .25s ease,box-shadow .25s ease}
+  .feat:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .feat .ic{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+    background:rgba(207,90,44,.12);margin-bottom:16px}
+  .feat .ic svg{width:22px;height:22px;stroke:var(--clay);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .feat h3{font-size:1.18rem;font-weight:600}
+  .feat p{margin-top:9px;font-size:.92rem;color:var(--ink-soft)}
+
+  /* Covers + languages */
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:32px;min-width:0}
+  .panel h3{font-size:1.4rem;font-weight:600}
+  .panel p{margin-top:8px;color:var(--ink-soft);font-size:.95rem}
+  .covers{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
+  .cover{aspect-ratio:3/4;border-radius:12px;border:1px solid rgba(0,0,0,.06);display:flex;align-items:flex-end;padding:10px;
+    font-family:var(--serif);font-size:.72rem;font-weight:600;color:#fff;box-shadow:0 8px 20px -12px rgba(0,0,0,.4)}
+  .cover.argila{background:linear-gradient(160deg,#c9744a,#9c4d27)}
+  .cover.tinta{background:linear-gradient(160deg,#3a4a5c,#1f2733);}
+  .cover.paper{background:linear-gradient(160deg,#efe7d6,#d8c9ad);color:#5c4a32}
+  .cover.degradat{background:linear-gradient(160deg,#cf5a2c,#e8a05f 55%,#6c8a9c)}
+  .langs{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .lang{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-size:.9rem;font-weight:500;background:var(--paper-2)}
+  .lang b{font-family:var(--serif);color:var(--clay);font-weight:600}
+
+  /* Privacy / trust */
+  .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:24px;overflow:hidden;background:var(--card)}
+  .trust .cell{padding:34px 28px;border-right:1px solid var(--line)}
+  .trust .cell:last-child{border-right:none}
+  .trust .num{font-family:var(--serif);font-size:2.6rem;font-weight:600;color:var(--clay);line-height:1}
+  .trust .cell h3{font-size:1.05rem;font-weight:600;margin-top:12px}
+  .trust .cell p{font-size:.9rem;color:var(--ink-soft);margin-top:6px}
+
+  /* Final CTA */
+  .final{text-align:center;background:linear-gradient(170deg,var(--paper-2),#f0e6d4);border-radius:30px;padding:clamp(44px,7vw,80px) 24px;border:1px solid var(--line)}
+  .final h2{font-size:clamp(2.1rem,5.5vw,3.4rem)}
+  .final h2 em{font-style:italic;color:var(--clay)}
+  .final p{margin:16px auto 0;color:var(--ink-soft);max-width:30em;font-size:1.08rem}
+  .final .ctas{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin-top:30px}
+  .icon-app{width:72px;height:72px;color:var(--ink);margin:0 auto 14px;display:block}
+
+  /* Footer */
+  footer{border-top:1px solid var(--line);padding:42px 0;margin-top:30px}
+  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px}
+  .foot .logo{font-size:1.25rem}
+  .foot-links{display:flex;gap:24px;font-size:.88rem;color:var(--ink-soft)}
+  .foot-links a:hover{color:var(--clay)}
+  .copy{font-size:.8rem;color:var(--ink-faint);margin-top:18px}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:880px){
+    .hero-grid{grid-template-columns:1fr;gap:36px}
+    .hero{padding:48px 0 20px;text-align:center}
+    .hero p.lead{margin-left:auto;margin-right:auto}
+    .hero .ctas,.badge-row,.hero .note{justify-content:center}
+    .grid{grid-template-columns:1fr 1fr}
+    .duo{grid-template-columns:1fr}
+    .trust{grid-template-columns:1fr}
+    .trust .cell{border-right:none;border-bottom:1px solid var(--line)}
+    .trust .cell:last-child{border-bottom:none}
+  }
+  @media(max-width:540px){
+    .grid{grid-template-columns:1fr}
+    section{padding:48px 0}
+    .panel{padding:26px 20px}
+    .covers{gap:8px}
+    .cover{padding:8px;font-size:.68rem}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{
+      animation-duration:.01ms!important;
+      animation-iteration-count:1!important;
+      transition-duration:.01ms!important;
+      scroll-behavior:auto!important;
+    }
+    .reveal{opacity:1;transform:none}
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <a href="./" class="brand" aria-label="Sutsumu — inici">
-        <svg class="brand-mark" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-          <path d="M28 58 Q28 46 40 43 L60 38 L80 43 Q92 46 92 58 L92 86 Q92 100 78 100 L42 100 Q28 100 28 86 Z" fill="currentColor"/>
-          <path d="M60 38 C54 30 46 30 44 38 C42 46 52 48 60 44 C68 48 78 46 76 38 C74 30 66 30 60 38 Z" fill="currentColor"/>
-          <path d="M44 64 Q60 72 76 64" stroke="var(--bg)" stroke-width="3.4" stroke-linecap="round" fill="none"/>
-        </svg>
-        <span class="brand-text">sutsumu<span class="brand-dot">.</span></span>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="sutsumu-mark" viewBox="0 0 120 120">
+    <mask id="sutsumu-smile">
+      <rect width="120" height="120" fill="#fff"/>
+      <path d="M44 64 Q60 72 76 64" fill="none" stroke="#000" stroke-width="3.8" stroke-linecap="round"/>
+    </mask>
+    <g fill="currentColor" mask="url(#sutsumu-smile)">
+      <path d="M28 58 Q28 46 40 43 L60 38 L80 43 Q92 46 92 58 L92 86 Q92 100 78 100 L42 100 Q28 100 28 86 Z"/>
+      <path d="M60 38 C54 30 46 30 44 38 C42 46 52 48 60 44 C68 48 78 46 76 38 C74 30 66 30 60 38 Z"/>
+    </g>
+  </symbol>
+</svg>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand" aria-label="Sutsumu">
+      <svg class="brand-icon" role="img" aria-hidden="true"><use href="#sutsumu-mark"/></svg>
+      <span class="logo">sutsumu<span>.</span></span>
+    </a>
+    <nav class="nav-links">
+      <a class="muted" href="#que-es">Què és</a>
+      <a class="muted" href="#funcions">Funcions</a>
+      <a class="muted" href="#privacitat">Privacitat</a>
+      <a class="btn btn-mini" href="https://apps.apple.com/app/sutsumu/id6776719183" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M16.5 1.5c.1 1-.3 2-1 2.8-.7.8-1.8 1.4-2.8 1.3-.1-1 .4-2 1-2.7.7-.8 1.9-1.4 2.8-1.4zM20.5 17c-.5 1.2-.8 1.7-1.5 2.7-.9 1.4-2.2 3.1-3.8 3.1-1.4 0-1.8-.9-3.7-.9s-2.3.9-3.7.9c-1.5 0-2.7-1.5-3.7-2.9C1.4 16.8.8 12.2 2.5 9.3c.9-1.5 2.5-2.5 4.2-2.5 1.5 0 2.5 1 3.7 1 1.2 0 1.9-1 3.7-1 1.4 0 2.9.8 3.9 2.1-3.4 1.9-2.8 6.8.5 8.1z"/></svg>
+        App Store
       </a>
-      <nav>
-        <a href="./support/">Suport</a>
-        <a href="./privacy/">Privacitat</a>
-        <a href="./terms/">Termes</a>
-      </nav>
-    </header>
-    <main>
-      <section class="hero">
-        <h1>sutsumu<span class="hero-dot">.</span></h1>
-        <p class="lead">El teu arxiu personal curat.</p>
-        <p class="hero-pitch">
-          Una app per a iPhone que tracta els teus documents com una biblioteca:
-          curada, persistent, teva. No és per a equips, ni per a tasques, ni per a notes
-          ràpides. És el lloc on els teus textos importants queden — amb el respecte
-          d'una edició impresa.
-        </p>
-        <p class="hero-cta">
-          <a class="appstore-btn" href="https://apps.apple.com/app/sutsumu/id6776719183" rel="noopener">
-            Disponible a l'App Store →
-          </a>
-        </p>
-      </section>
-
-      <section class="pitch">
-        <h2>Què és Sutsumu</h2>
-        <p>
-          Sutsumu és <strong>l'antinotion</strong>: no t'imposa estructura, no et fa
-          configurar cap equip, no et bombardeja amb notificacions. Funciona en local
-          al teu iPhone des del primer obrir. Si vols, et pots crear compte i
-          sincronitzar entre dispositius. Si no, tot queda al teu telèfon i prou.
-        </p>
-        <p>
-          Cada document té el seu lloc, amb categoria i etiquetes. Hi ha quatre
-          caràtules — Argila, Tinta, Paper, Degradat — perquè triïs el to de la
-          teva edició. Hi ha cinc llengües — català, castellà, anglès, francès,
-          italià — perquè l'app et parli en la teva.
-        </p>
-      </section>
-
-      <section class="highlights">
-        <div class="highlight-card">
-          <h3>Funciona sense compte</h3>
-          <p>Mode local des del primer dia. Els teus textos viuen al teu iPhone, sense núvol, sense compromisos.</p>
-        </div>
-        <div class="highlight-card">
-          <h3>Sincronització opcional</h3>
-          <p>Si vols el teu arxiu a més d'un dispositiu, crea compte i sincronitza. Si no, no.</p>
-        </div>
-        <div class="highlight-card">
-          <h3>Sense rastreig</h3>
-          <p>No hi ha analítica, ni publicitat, ni venda de dades. L'única telemetria és un sistema opcional d'errors que pots activar o desactivar.</p>
-        </div>
-        <div class="highlight-card">
-          <h3>Quatre caràtules, cinc llengües</h3>
-          <p>Editorial per defecte: tries l'estètica de la portada i la llengua de l'app des de Perfil. Canvi immediat.</p>
-        </div>
-      </section>
-
-      <section class="english">
-        <h2>In English</h2>
-        <p>
-          Sutsumu is an iPhone app that treats your personal documents like a curated
-          library: persistent, edited, yours. It works locally from the first launch.
-          If you want, create a free account to sync between devices; if not, everything
-          stays on your phone. Four covers, five languages, no tracking.
-          <a href="https://apps.apple.com/app/sutsumu/id6776719183" rel="noopener">Available on the App Store</a>.
-        </p>
-      </section>
-
-      <section class="resources">
-        <h2>Recursos</h2>
-        <div class="landing-card">
-          <h3>Suport</h3>
-          <p>Com contactar-nos, preguntes freqüents i com reportar un problema.</p>
-          <a class="cta" href="./support/">Llegir →</a>
-        </div>
-        <div class="landing-card">
-          <h3>Política de privacitat</h3>
-          <p>Què tractem, què no, on es desa i quins drets tens.</p>
-          <a class="cta" href="./privacy/">Llegir →</a>
-        </div>
-        <div class="landing-card">
-          <h3>Termes d'ús</h3>
-          <p>Com fer servir l'app, responsabilitats i contacte.</p>
-          <a class="cta" href="./terms/">Llegir →</a>
-        </div>
-      </section>
-    </main>
-    <footer>
-      <nav>
-        <a href="./support/">Suport</a>
-        <a href="./privacy/">Política de privacitat</a>
-        <a href="./terms/">Termes d'ús</a>
-      </nav>
-      <p>© Sutsumu</p>
-    </footer>
+    </nav>
   </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="reveal in">
+        <span class="eyebrow">App per a iPhone · Gratuïta</span>
+        <h1>El teu arxiu personal, tractat com una <em>biblioteca</em>.</h1>
+        <p class="lead">Sutsumu conserva els teus textos, notes i documents amb la pulcritud d'una edició impresa. Curat, persistent, teu — sense soroll ni distraccions.</p>
+        <div class="ctas">
+          <a class="btn" href="https://apps.apple.com/app/sutsumu/id6776719183" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M16.5 1.5c.1 1-.3 2-1 2.8-.7.8-1.8 1.4-2.8 1.3-.1-1 .4-2 1-2.7.7-.8 1.9-1.4 2.8-1.4zM20.5 17c-.5 1.2-.8 1.7-1.5 2.7-.9 1.4-2.2 3.1-3.8 3.1-1.4 0-1.8-.9-3.7-.9s-2.3.9-3.7.9c-1.5 0-2.7-1.5-3.7-2.9C1.4 16.8.8 12.2 2.5 9.3c.9-1.5 2.5-2.5 4.2-2.5 1.5 0 2.5 1 3.7 1 1.2 0 1.9-1 3.7-1 1.4 0 2.9.8 3.9 2.1-3.4 1.9-2.8 6.8.5 8.1z"/></svg>
+            <span class="ds"><small>Descarrega a l'</small><b>App Store</b></span>
+          </a>
+        </div>
+        <div class="badge-row">
+          <span class="b"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/></svg> Sense rastreig</span>
+          <span class="b"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Funciona en local</span>
+          <span class="b"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> iOS 17+ · 5 MB</span>
+        </div>
+        <p class="note"><b>Mode local des del primer dia.</b> Sincronització opcional si la vols.</p>
+      </div>
+
+      <div class="phone-stage reveal in">
+        <div class="glow"></div>
+        <div class="phone">
+          <div class="screen">
+            <svg class="app-screen" viewBox="0 0 390 844" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pantalla principal de l'app Sutsumu: la teva prestatgeria de documents">
+              <rect width="390" height="844" fill="#f1ece2"></rect>
+              <text x="32" y="34" class="mono" font-size="13" font-weight="500" fill="#17130d">9:41</text>
+              <g fill="#17130d">
+                <rect x="312" y="26" width="3" height="5" rx="1"></rect>
+                <rect x="317" y="24" width="3" height="7" rx="1"></rect>
+                <rect x="322" y="22" width="3" height="9" rx="1"></rect>
+                <rect x="327" y="20" width="3" height="11" rx="1"></rect>
+              </g>
+              <g fill="none" stroke="#17130d" stroke-width="1.3" stroke-linecap="round">
+                <path d="M337 26c2 0 3.8.8 5 2.1"></path>
+                <path d="M337 29.5c1 0 2 .4 2.7 1.1"></path>
+              </g>
+              <circle cx="339.5" cy="33" r="1.2" fill="#17130d"></circle>
+              <rect x="350" y="22" width="22" height="11" rx="2.5" fill="none" stroke="#17130d" stroke-width="1.3"></rect>
+              <rect x="352" y="24" width="14" height="7" rx="1" fill="#17130d"></rect>
+              <rect x="373" y="25" width="1.6" height="5" rx="0.8" fill="#17130d"></rect>
+              <g transform="translate(22,52) scale(0.25)">
+                <path d="M28 58 Q28 46 40 43 L60 38 L80 43 Q92 46 92 58 L92 86 Q92 100 78 100 L42 100 Q28 100 28 86 Z" fill="#17130d"></path>
+                <path d="M60 38 C54 30 46 30 44 38 C42 46 52 48 60 44 C68 48 78 46 76 38 C74 30 66 30 60 38 Z" fill="#17130d"></path>
+                <path d="M44 64 Q60 72 76 64" stroke="#f1ece2" stroke-width="3.4" stroke-linecap="round" fill="none"></path>
+              </g>
+              <text x="60" y="68" class="wm" font-size="20" letter-spacing="-0.6" fill="#17130d">sutsumu<tspan fill="#cf5a2c">.</tspan></text>
+              <text x="60" y="84" class="serif" font-size="13" fill="#5e574a">El teu arxivador personal</text>
+              <circle cx="356" cy="68" r="17" fill="none" stroke="rgba(23,19,13,0.2)" stroke-width="1"></circle>
+              <g fill="none" stroke="#3a342b" stroke-width="1.5" stroke-linecap="round" transform="translate(349,61)"><circle cx="6.5" cy="6.5" r="4"></circle><path d="M9.5 9.5L13 13"></path></g>
+              <text x="22" y="118" class="serif" font-size="25" fill="#17130d">Continua on ho vas</text>
+              <clipPath id="fcard"><rect x="22" y="132" width="346" height="118" rx="16"></rect></clipPath>
+              <rect x="22" y="132" width="346" height="118" rx="16" fill="#17130d"></rect>
+              <g clip-path="url(#fcard)">
+                <text x="372" y="262" class="serif" font-size="150" fill="rgba(207,90,44,0.14)" text-anchor="end">包</text>
+              </g>
+              <rect x="22" y="132" width="13" height="118" fill="#cf5a2c"></rect>
+              <text x="50" y="160" class="mono" font-size="9" letter-spacing="1.6" fill="#cf5a2c">ASSAIG · ESBORRANY</text>
+              <text x="50" y="188" class="serif" font-size="27" fill="#f1ece2">Sobre el silenci</text>
+              <text x="50" y="212" class="mono" font-size="9.5" fill="rgba(241,236,226,0.6)">8 pàg · editat fa 2 h · TXT</text>
+              <rect x="50" y="222" width="92" height="20" rx="10" fill="none" stroke="rgba(241,236,226,0.3)"></rect>
+              <text x="60" y="235" class="mono" font-size="9" letter-spacing="1.2" fill="#f1ece2">OBRIR ▸ PÀG. 5</text>
+              <text x="22" y="298" class="serif" font-size="25" fill="#17130d">La teva prestatgeria</text>
+              <text x="368" y="290" class="mono" font-size="9.5" letter-spacing="1.3" fill="#5e574a" text-anchor="end">23 VOLUMS</text>
+              <g>
+                <rect x="34" y="320" width="60" height="132" rx="4" fill="#1e2540"></rect>
+                <rect x="37" y="320" width="1" height="132" fill="rgba(255,255,255,0.12)"></rect>
+                <rect x="34" y="329" width="60" height="1" fill="#dde0ec" opacity="0.22"></rect>
+                <rect x="34" y="442" width="60" height="1" fill="#dde0ec" opacity="0.22"></rect>
+                <text x="64" y="386" transform="rotate(-90 64 386)" fill="#dde0ec" font-family="Newsreader, serif" font-style="italic" font-size="13.5" text-anchor="middle" dominant-baseline="middle">Contracte de lloguer</text>
+                <text x="64" y="447" fill="#dde0ec" opacity="0.7" font-family="ui-monospace, monospace" font-size="6.5" letter-spacing="0.5" text-anchor="middle">PDF</text>
+              </g><g>
+                <rect x="100.5" y="334" width="60" height="118" rx="4" fill="#e6ddca"></rect>
+                <rect x="103.5" y="334" width="1" height="118" fill="rgba(255,255,255,0.12)"></rect>
+                <rect x="100.5" y="343" width="60" height="1" fill="#17130d" opacity="0.22"></rect>
+                <rect x="100.5" y="442" width="60" height="1" fill="#17130d" opacity="0.22"></rect>
+                <text x="130.5" y="393" transform="rotate(-90 130.5 393)" fill="#17130d" font-family="Newsreader, serif" font-style="italic" font-size="13.5" text-anchor="middle" dominant-baseline="middle">A la M., maig</text>
+                <text x="130.5" y="447" fill="#17130d" opacity="0.7" font-family="ui-monospace, monospace" font-size="6.5" letter-spacing="0.5" text-anchor="middle">MD</text>
+              </g><g>
+                <rect x="167" y="326" width="60" height="126" rx="4" fill="#a82e3b"></rect>
+                <rect x="170" y="326" width="1" height="126" fill="rgba(255,255,255,0.12)"></rect>
+                <rect x="167" y="335" width="60" height="1" fill="#fce4dc" opacity="0.22"></rect>
+                <rect x="167" y="442" width="60" height="1" fill="#fce4dc" opacity="0.22"></rect>
+                <text x="197" y="389" transform="rotate(-90 197 389)" fill="#fce4dc" font-family="Newsreader, serif" font-style="italic" font-size="13.5" text-anchor="middle" dominant-baseline="middle">Idees Àgora</text>
+                <text x="197" y="447" fill="#fce4dc" opacity="0.7" font-family="ui-monospace, monospace" font-size="6.5" letter-spacing="0.5" text-anchor="middle">MD</text>
+              </g><g>
+                <rect x="233.5" y="348" width="60" height="104" rx="4" fill="#c89f3c"></rect>
+                <rect x="236.5" y="348" width="1" height="104" fill="rgba(255,255,255,0.12)"></rect>
+                <rect x="233.5" y="357" width="60" height="1" fill="#3a2c08" opacity="0.22"></rect>
+                <rect x="233.5" y="442" width="60" height="1" fill="#3a2c08" opacity="0.22"></rect>
+                <text x="263.5" y="400" transform="rotate(-90 263.5 400)" fill="#3a2c08" font-family="Newsreader, serif" font-style="italic" font-size="13.5" text-anchor="middle" dominant-baseline="middle">Recepta Remei</text>
+                <text x="263.5" y="447" fill="#3a2c08" opacity="0.7" font-family="ui-monospace, monospace" font-size="6.5" letter-spacing="0.5" text-anchor="middle">PDF</text>
+              </g><g>
+                <rect x="300" y="340" width="60" height="112" rx="4" fill="#262320"></rect>
+                <rect x="303" y="340" width="1" height="112" fill="rgba(255,255,255,0.12)"></rect>
+                <rect x="300" y="349" width="60" height="1" fill="#e7e0d1" opacity="0.22"></rect>
+                <rect x="300" y="442" width="60" height="1" fill="#e7e0d1" opacity="0.22"></rect>
+                <text x="330" y="396" transform="rotate(-90 330 396)" fill="#e7e0d1" font-family="Newsreader, serif" font-style="italic" font-size="13.5" text-anchor="middle" dominant-baseline="middle">Diari lectura</text>
+                <text x="330" y="447" fill="#e7e0d1" opacity="0.7" font-family="ui-monospace, monospace" font-size="6.5" letter-spacing="0.5" text-anchor="middle">MD</text>
+              </g>
+              <rect x="28" y="452" width="334" height="11" rx="2" fill="#8a6f47"></rect>
+              <rect x="28" y="452" width="334" height="7" rx="2" fill="#b79b6e"></rect>
+              <g>
+                <rect x="34" y="494" width="60" height="138" rx="4" fill="#6f7657"></rect>
+                <rect x="37" y="494" width="1" height="138" fill="rgba(255,255,255,0.12)"></rect>
+                <rect x="34" y="503" width="60" height="1" fill="#eef0e4" opacity="0.22"></rect>
+                <rect x="34" y="622" width="60" height="1" fill="#eef0e4" opacity="0.22"></rect>
+                <text x="64" y="563" transform="rotate(-90 64 563)" fill="#eef0e4" font-family="Newsreader, serif" font-style="italic" font-size="13.5" text-anchor="middle" dominant-baseline="middle">Notes de viatge</text>
+                <text x="64" y="627" fill="#eef0e4" opacity="0.7" font-family="ui-monospace, monospace" font-size="6.5" letter-spacing="0.5" text-anchor="middle">MD</text>
+              </g><g>
+                <rect x="100.5" y="528" width="60" height="104" rx="4" fill="#cf5a2c"></rect>
+                <rect x="103.5" y="528" width="1" height="104" fill="rgba(255,255,255,0.12)"></rect>
+                <rect x="100.5" y="537" width="60" height="1" fill="#fbe9df" opacity="0.22"></rect>
+                <rect x="100.5" y="622" width="60" height="1" fill="#fbe9df" opacity="0.22"></rect>
+                <text x="130.5" y="580" transform="rotate(-90 130.5 580)" fill="#fbe9df" font-family="Newsreader, serif" font-style="italic" font-size="13.5" text-anchor="middle" dominant-baseline="middle">Garanties</text>
+                <text x="130.5" y="627" fill="#fbe9df" opacity="0.7" font-family="ui-monospace, monospace" font-size="6.5" letter-spacing="0.5" text-anchor="middle">PDF</text>
+              </g><g>
+                <rect x="167" y="500" width="60" height="132" rx="4" fill="#a890c8"></rect>
+                <rect x="170" y="500" width="1" height="132" fill="rgba(255,255,255,0.12)"></rect>
+                <rect x="167" y="509" width="60" height="1" fill="#2a1e3d" opacity="0.22"></rect>
+                <rect x="167" y="622" width="60" height="1" fill="#2a1e3d" opacity="0.22"></rect>
+                <text x="197" y="566" transform="rotate(-90 197 566)" fill="#2a1e3d" font-family="Newsreader, serif" font-style="italic" font-size="13.5" text-anchor="middle" dominant-baseline="middle">Poemes solts</text>
+                <text x="197" y="627" fill="#2a1e3d" opacity="0.7" font-family="ui-monospace, monospace" font-size="6.5" letter-spacing="0.5" text-anchor="middle">TXT</text>
+              </g><g>
+                <rect x="233.5" y="520" width="60" height="112" rx="4" fill="#1e2540"></rect>
+                <rect x="236.5" y="520" width="1" height="112" fill="rgba(255,255,255,0.12)"></rect>
+                <rect x="233.5" y="529" width="60" height="1" fill="#dde0ec" opacity="0.22"></rect>
+                <rect x="233.5" y="622" width="60" height="1" fill="#dde0ec" opacity="0.22"></rect>
+                <text x="263.5" y="576" transform="rotate(-90 263.5 576)" fill="#dde0ec" font-family="Newsreader, serif" font-style="italic" font-size="13.5" text-anchor="middle" dominant-baseline="middle">Testament vital</text>
+                <text x="263.5" y="627" fill="#dde0ec" opacity="0.7" font-family="ui-monospace, monospace" font-size="6.5" letter-spacing="0.5" text-anchor="middle">PDF</text>
+              </g><g>
+                <rect x="300" y="506" width="60" height="126" rx="4" fill="#e6ddca"></rect>
+                <rect x="303" y="506" width="1" height="126" fill="rgba(255,255,255,0.12)"></rect>
+                <rect x="300" y="515" width="60" height="1" fill="#17130d" opacity="0.22"></rect>
+                <rect x="300" y="622" width="60" height="1" fill="#17130d" opacity="0.22"></rect>
+                <text x="330" y="569" transform="rotate(-90 330 569)" fill="#17130d" font-family="Newsreader, serif" font-style="italic" font-size="13.5" text-anchor="middle" dominant-baseline="middle">Cartes 2019</text>
+                <text x="330" y="627" fill="#17130d" opacity="0.7" font-family="ui-monospace, monospace" font-size="6.5" letter-spacing="0.5" text-anchor="middle">MD</text>
+              </g>
+              <rect x="28" y="632" width="334" height="11" rx="2" fill="#8a6f47"></rect>
+              <rect x="28" y="632" width="334" height="7" rx="2" fill="#b79b6e"></rect>
+              <rect x="0" y="763" width="390" height="81" fill="#f4efe6"></rect>
+              <rect x="0" y="763" width="390" height="1" fill="rgba(23,19,13,0.12)"></rect>
+              <g transform="translate(58,778)" fill="none" stroke="#cf5a2c" stroke-width="1.6"><path d="M4 5.5h3.5v12H4zM9 5.5h3.5v12H9zM14.2 6l3.3.8-2.4 11.4-3.3-.8z"></path></g>
+              <text x="69" y="810" class="mono" font-size="9" letter-spacing="0.9" fill="#cf5a2c" text-anchor="middle">PRESTATGE</text>
+              <g transform="translate(180,778)" fill="none" stroke="#5e574a" stroke-width="1.6"><circle cx="9.5" cy="9.5" r="6"></circle><path d="M14 14l4.5 4.5" stroke-linecap="round"></path></g>
+              <text x="191" y="810" class="mono" font-size="9" letter-spacing="0.9" fill="#5e574a" text-anchor="middle">CERCA</text>
+              <g transform="translate(300,778)" fill="none" stroke="#5e574a" stroke-width="1.6"><circle cx="11" cy="8" r="3.4"></circle><path d="M4.5 18.5c.7-3.8 3.2-6 6.5-6s5.8 2.2 6.5 6" stroke-linecap="round"></path></g>
+              <text x="311" y="810" class="mono" font-size="9" letter-spacing="0.9" fill="#5e574a" text-anchor="middle">PERFIL</text>
+              <circle cx="340" cy="724" r="27" fill="#cf5a2c"></circle>
+              <g stroke="#f1ece2" stroke-width="2.2" stroke-linecap="round"><path d="M340 713v22M329 724h22"></path></g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section id="que-es">
+    <div class="wrap">
+      <div class="manifesto reveal">
+        <span class="eyebrow">Què és Sutsumu</span>
+        <h2>Senzill a propòsit: sense estructures imposades, sense equips, ni <em>notificacions</em>.</h2>
+        <p>No és per a tasques ni per a notes ràpides. És el lloc on els teus textos importants queden — amb el respecte d'una edició impresa. Funciona en local al teu iPhone des del primer obrir. Si vols, crees compte i sincronitzes entre dispositius. Si no, tot queda al teu telèfon i prou.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="funcions">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Funcions</span>
+        <h2>Una eina senzilla, amb sensibilitat editorial.</h2>
+        <p>Tot el que necessites per cuidar els teus textos, i res que en sobri.</p>
+      </div>
+      <div class="grid">
+        <div class="feat reveal">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 19V5a2 2 0 012-2h9l5 5v11a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M8 8h6M8 12h8M8 16h5"/></svg></div>
+          <h3>Markdown amb dos modes</h3>
+          <p>Escriu en mode «Edita» i passa a «Llegeix» per veure el text net, com una pàgina impresa.</p>
+        </div>
+        <div class="feat reveal">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 7l2-3h14l2 3M3 7v12a1 1 0 001 1h16a1 1 0 001-1V7M3 7h18M9 12h6"/></svg></div>
+          <h3>Col·leccions a mida</h3>
+          <p>Organitza els documents en col·leccions amb colors i icones pròpies. Etiqueta i categoritza.</p>
+        </div>
+        <div class="feat reveal">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg></div>
+          <h3>Tres capes de còpia</h3>
+          <p>Exporta, restaura i historial de versions. La tranquil·litat que el teu arxiu no es perd mai.</p>
+        </div>
+        <div class="feat reveal">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-9-9m9 9h-6m6 0a9 9 0 00-3-6.7"/></svg></div>
+          <h3>Sincronització opcional</h3>
+          <p>Crea compte propi i tingues l'arxiu a tots els teus dispositius. O no — tu decideixes.</p>
+        </div>
+        <div class="feat reveal">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 8V6a2 2 0 012-2h2M16 4h2a2 2 0 012 2v2M20 16v2a2 2 0 01-2 2h-2M8 20H6a2 2 0 01-2-2v-2"/><circle cx="12" cy="12" r="2"/></svg></div>
+          <h3>Imatges i fitxers</h3>
+          <p>Adjunta imatges o documents als teus textos perquè tot el que importa visqui al mateix lloc.</p>
+        </div>
+        <div class="feat reveal">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18"/><circle cx="12" cy="12" r="9"/></svg></div>
+          <h3>Mode local pur</h3>
+          <p>Sense compte ni núvol des del dia u. Els teus textos viuen al teu iPhone, sense compromisos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COVERS + LANGUAGES -->
+  <section>
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Editorial per defecte</span>
+        <h2>Tries el to de la teva edició.</h2>
+      </div>
+      <div class="duo">
+        <div class="panel reveal">
+          <h3>Quatre caràtules</h3>
+          <p>Argila, Tinta, Paper i Degradat. Canvia l'estètica de la portada des de Perfil, amb efecte immediat.</p>
+          <div class="covers">
+            <div class="cover argila">Argila</div>
+            <div class="cover tinta">Tinta</div>
+            <div class="cover paper">Paper</div>
+            <div class="cover degradat">Degradat</div>
+          </div>
+        </div>
+        <div class="panel reveal">
+          <h3>Cinc llengües</h3>
+          <p>L'app et parla en la teva llengua. Tria-la des de Perfil, amb canvi immediat.</p>
+          <div class="langs">
+            <span class="lang"><b>Ca</b> Català</span>
+            <span class="lang"><b>Es</b> Castellà</span>
+            <span class="lang"><b>En</b> English</span>
+            <span class="lang"><b>Fr</b> Français</span>
+            <span class="lang"><b>It</b> Italiano</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVACY / TRUST -->
+  <section id="privacitat">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Privacitat de veritat</span>
+        <h2>El teu contingut no surt del telèfon sense que tu ho diguis.</h2>
+      </div>
+      <div class="trust reveal">
+        <div class="cell">
+          <div class="num">0</div>
+          <h3>Analítica i rastreig</h3>
+          <p>No hi ha analítica, ni publicitat, ni venda de dades. Mai.</p>
+        </div>
+        <div class="cell">
+          <div class="num">Opt-in</div>
+          <h3>Informes d'errors</h3>
+          <p>L'única telemetria és opcional i ve desactivada per defecte. Tu l'actives si vols.</p>
+        </div>
+        <div class="cell">
+          <div class="num">100%</div>
+          <h3>Al teu dispositiu</h3>
+          <p>El contingut dels teus documents no surt del telèfon sense una acció explícita teva.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section>
+    <div class="wrap">
+      <div class="final reveal">
+        <svg class="icon-app" role="img" aria-label="Sutsumu"><use href="#sutsumu-mark"/></svg>
+        <span class="eyebrow">Disponible ara</span>
+        <h2>Dona als teus textos un <em>lloc digne</em> on viure.</h2>
+        <p>Gratuïta, en local des del primer dia i sense rastreig. Descarrega Sutsumu i comença el teu arxiu.</p>
+        <div class="ctas">
+          <a class="btn" href="https://apps.apple.com/app/sutsumu/id6776719183" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M16.5 1.5c.1 1-.3 2-1 2.8-.7.8-1.8 1.4-2.8 1.3-.1-1 .4-2 1-2.7.7-.8 1.9-1.4 2.8-1.4zM20.5 17c-.5 1.2-.8 1.7-1.5 2.7-.9 1.4-2.2 3.1-3.8 3.1-1.4 0-1.8-.9-3.7-.9s-2.3.9-3.7.9c-1.5 0-2.7-1.5-3.7-2.9C1.4 16.8.8 12.2 2.5 9.3c.9-1.5 2.5-2.5 4.2-2.5 1.5 0 2.5 1 3.7 1 1.2 0 1.9-1 3.7-1 1.4 0 2.9.8 3.9 2.1-3.4 1.9-2.8 6.8.5 8.1z"/></svg>
+            <span class="ds"><small>Descarrega a l'</small><b>App Store</b></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a href="#top" class="brand" aria-label="Sutsumu">
+        <svg class="brand-icon" role="img" aria-hidden="true"><use href="#sutsumu-mark"/></svg>
+        <span class="logo">sutsumu<span>.</span></span>
+      </a>
+      <nav class="foot-links">
+        <a href="https://sutsumu.com/support/">Suport</a>
+        <a href="https://sutsumu.com/privacy/">Política de privacitat</a>
+        <a href="https://sutsumu.com/terms/">Termes d'ús</a>
+      </nav>
+    </div>
+    <p class="copy">© Sutsumu — El teu arxiu personal curat.</p>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
 </body>
 </html>
